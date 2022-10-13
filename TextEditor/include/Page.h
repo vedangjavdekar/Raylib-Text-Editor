@@ -7,7 +7,7 @@ class Page
 {
 public:
 	void AddCharToCurrentLine(char c);
-	void AddNewLine();
+	void HandleNewLine();
 	void DeleteCurrentLine();
 	void MoveCursorLeft();
 	void MoveCursorRight();

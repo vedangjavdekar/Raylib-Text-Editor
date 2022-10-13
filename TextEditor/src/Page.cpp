@@ -9,10 +9,17 @@ void Page::AddCharToCurrentLine(char c)
 	}
 }
 
-void Page::AddNewLine()
+void Page::HandleNewLine()
 {
-	m_Lines.emplace_back(std::make_unique<TextLine>());
-	m_LineIndex = m_Lines.size() - 1;
+	if (m_LineIndex == m_Lines.size() - 1)
+	{
+		m_Lines.emplace_back(std::make_unique<TextLine>());
+		m_LineIndex = m_Lines.size() - 1;
+	}
+	else
+	{
+		MoveDownLine();
+	}
 }
 
 void Page::DeleteCurrentLine()

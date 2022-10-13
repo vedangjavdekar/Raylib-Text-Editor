@@ -16,7 +16,7 @@ int main()
 
 
 	Page page;
-	page.AddNewLine();
+	page.HandleNewLine();
 
 	while (!WindowShouldClose())
 	{
@@ -82,7 +82,7 @@ int main()
 
 		if (IsKeyPressed(KEY_ENTER))
 		{
-			page.AddNewLine();
+			page.HandleNewLine();
 			isBlinking = false;
 			frameCounter = 0;
 		}
