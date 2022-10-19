@@ -18,7 +18,8 @@ void Page::HandleNewLine()
 	}
 	else
 	{
-		MoveDownLine();
+		m_Lines.insert(m_Lines.begin() + m_LineIndex + 1, std::make_unique<TextLine>());
+		m_LineIndex++;
 	}
 }
 
@@ -27,7 +28,7 @@ void Page::DeleteCurrentLine()
 	if (m_Lines.size() > 1)
 	{
 		m_Lines.erase(m_Lines.begin() + m_LineIndex);
-		if (m_LineIndex > 0)
+		if (m_LineIndex == m_Lines.size())
 		{
 			m_LineIndex--;
 		}
@@ -52,7 +53,7 @@ void Page::MoveCursorRight()
 
 void Page::MoveDownLine()
 {
-	if (m_LineIndex < m_Lines.size())
+	if (m_LineIndex < m_Lines.size() - 1)
 	{
 		m_LineIndex++;
 	}
@@ -60,7 +61,7 @@ void Page::MoveDownLine()
 
 void Page::MoveUpLine()
 {
-	if (m_LineIndex > -1)
+	if (m_LineIndex > 0)
 	{
 		m_LineIndex--;
 	}
@@ -115,13 +116,12 @@ void Page::GetCursorXY(int& x, int& y)
 	if (m_LineIndex > -1)
 	{
 		std::string text = m_Lines[m_LineIndex]->ToString();
-		int width = MeasureText(text.c_str(), 20);
 		x = MeasureText(text.substr(0, m_Lines[m_LineIndex]->CursorIndex()).c_str(), 20);
 		y = m_LineIndex * 20;
 	}
 	else
 	{
-		x = 20;
-		y = 10;
+		x = 0;
+		y = 0;
 	}
 }
