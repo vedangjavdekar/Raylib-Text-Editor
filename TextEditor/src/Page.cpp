@@ -1,5 +1,6 @@
 #include "Page.h"
 #include "raylib.h"
+#include <cstdlib>
 
 void Page::AddCharToCurrentLine(char c)
 {
@@ -14,7 +15,7 @@ void Page::HandleNewLine()
 	if (m_LineIndex == m_Lines.size() - 1)
 	{
 		m_Lines.emplace_back(std::make_unique<TextLine>());
-		m_LineIndex = m_Lines.size() - 1;
+		m_LineIndex = (int)m_Lines.size() - 1;
 	}
 	else
 	{
@@ -99,7 +100,7 @@ void Page::Draw()
 	DrawRectangle(0, 0, 20, 720, LIGHTGRAY);
 	for (int i = 0; i < m_Lines.size(); ++i)
 	{
-		const char* lineNumber = itoa(i + 1, buffer, 10);
+		const char* lineNumber = _itoa(i + 1, buffer, 10);
 		int width = MeasureText(lineNumber, 20);
 		DrawText(lineNumber, 15 - width, 10 + i * 20, 20, GRAY);
 	}

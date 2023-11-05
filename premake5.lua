@@ -9,6 +9,7 @@ project "TextEditor"
    kind "ConsoleApp"
    language "C++"
    cppdialect "C++17"
+   staticruntime "off"
 
    targetdir "bin/%{prj.name}/%{cfg.buildcfg}"
    debugdir "bin/%{prj.name}/%{cfg.buildcfg}"
@@ -17,6 +18,11 @@ project "TextEditor"
 
    dependson {"raylib"}
    links{"raylib"}
+
+   defines{
+      "PLATFORM_DESKTOP",
+      "GRAPHICS_API_OPENGL_43"
+   }
 
    libdirs{
       "bin/raylib/%{cfg.buildcfg}"
